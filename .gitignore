@@ -38,6 +38,7 @@ Module.symvers
 modules.order
 xapp1151_cam_v1_1
 sw/driver/.updated.txt
+sw/driver/.git_updated
 hw/lib/std/axi_sim_transactor_v1_0_0/hdl/axis_sim_pkg/
 hw/lib/xilinx/cam_v1_1_0/hdl/vhdl/cam/*.vhd
 hw/lib/xilinx/tcam_v1_1_0/hdl/vhdl/tcam/*.vhd

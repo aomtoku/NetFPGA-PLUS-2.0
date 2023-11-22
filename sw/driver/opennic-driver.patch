@@ -66,10 +66,11 @@ diff -uprN ./onic_main.c ./onic_main.c
  	rv = register_netdev(netdev);
  	if (rv < 0) {
  		dev_err(&pdev->dev, "register_netdev, err = %d", rv);
+
 diff -uprN ./onic_netdev.c ./onic_netdev.c
---- ./onic_netdev.c	2020-10-10 22:22:57.000000000 +0900
-+++ ./onic_netdev.c	2021-02-02 14:52:46.000000000 +0900
-@@ -24,6 +24,97 @@
+--- onic_netdev.c.orig	2023-11-22 06:41:25.221771795 +0000
++++ onic_netdev.c	2023-11-22 06:54:28.993456651 +0000
+@@ -25,6 +25,97 @@
  
  #define ONIC_RX_DESC_STEP 256
  
@@ -167,7 +168,7 @@ diff -uprN ./onic_netdev.c ./onic_netdev.c
  inline static u16 onic_ring_get_real_count(struct onic_ring *ring)
  {
  	/* Valid writeback entry means one less count of descriptor entries */
-@@ -609,6 +700,34 @@ netdev_tx_t onic_xmit_frame(struct sk_bu
+@@ -742,6 +833,34 @@ netdev_tx_t onic_xmit_frame(struct sk_bu
  	return NETDEV_TX_OK;
  }
  
@@ -199,13 +200,13 @@ diff -uprN ./onic_netdev.c ./onic_netdev.c
 +}
 +#endif /*NF_IOCTl*/
 +
-     int onic_set_mac_address(struct net_device *dev, void *addr)
-     {
-     	u8 *dev_addr = (u8 *)addr;
-@@ -622,6 +741,50 @@ int onic_set_mac_address(struct net_devi
-
-     int onic_do_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
-     {
+ int onic_set_mac_address(struct net_device *dev, void *addr)
+ {
+ 	struct sockaddr *saddr = addr;
+@@ -758,6 +877,45 @@ int onic_set_mac_address(struct net_devi
+ 
+ int onic_do_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
+ {
 +#ifdef NF_IOCTL
 +	struct onic_private *priv = netdev_priv(dev);
 +	struct nfdp_dev *nfdev = onic_get_nfdp_dev(priv->hw.nfdp_handle);
@@ -229,11 +230,6 @@ diff -uprN ./onic_netdev.c ./onic_netdev.c
 +			err = -EFAULT;
 +			break;
 +		}
-+		//err = ioctl_write_reg(nfdev, &sifr);
-+		//if (err != 0) {
-+		//	err = -EFAULT;
-+		//	break;
-+		//}
 +		err = ioctl_read_reg(nfdev, &sifr);
 +		if (err != 0) {
 +			err = -EFAULT;
@@ -250,8 +246,8 @@ diff -uprN ./onic_netdev.c ./onic_netdev.c
 +		break;
 +	}
 +#endif /*NF_IOCTL*/
-         return 0;
-     }
+ 	return 0;
+ }
  
 diff -uprN ./onic_netdev.h ./onic_netdev.h
 --- ./onic_netdev.h	2020-10-10 22:22:57.000000000 +0900
@@ -284,15 +280,3 @@ diff -uprN ./onic_netdev.h ./onic_netdev.h
 +#endif /* NF_IOCTL */
 +
  #endif
-diff -uprN ./onic_register.h ./onic_register.h
---- ./onic_register.h	2020-10-10 22:22:57.000000000 +0900
-+++ ./onic_register.h	2021-02-02 14:52:46.000000000 +0900
-@@ -30,7 +30,7 @@ static inline void onic_write_reg(struct
- }
- 
- #define SHELL_START					0x0
--#define SHELL_END					0x10000
-+#define SHELL_END					0x40000
- #define SHELL_MAXLEN					(SHELL_END - SHELL_START)
- 
- /***** system config registers *****/
