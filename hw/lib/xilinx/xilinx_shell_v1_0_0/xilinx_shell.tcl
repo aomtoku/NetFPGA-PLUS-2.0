@@ -172,6 +172,26 @@ generate_target {instantiation_template} [get_files ./${proj}/${system_managemen
 generate_target all [get_files ./${proj}/${system_management_wiz}/${system_management_wiz}.xci]
 ipx::package_project -force -import_files ./${proj}/${system_management_wiz}/${system_management_wiz}.xci
 
+source "open-nic-shell/src/system_config/vivado_ip/clk_wiz_50Mhz.tcl"
+generate_target {instantiation_template} [get_files ./${proj}/${clk_wiz_50Mhz}/${clk_wiz_50Mhz}.xci]
+generate_target all [get_files ./${proj}/${clk_wiz_50Mhz}/${clk_wiz_50Mhz}.xci]
+ipx::package_project -force -import_files ./${proj}/${clk_wiz_50Mhz}/${clk_wiz_50Mhz}.xci
+
+source "open-nic-shell/src/system_config/vivado_ip/axi_quad_spi_0.tcl"
+generate_target {instantiation_template} [get_files ./${proj}/${axi_quad_spi}/${axi_quad_spi}.xci]
+generate_target all [get_files ./${proj}/${axi_quad_spi}/${axi_quad_spi}.xci]
+ipx::package_project -force -import_files ./${proj}/${axi_quad_spi}/${axi_quad_spi}.xci
+
+source "open-nic-shell/src/system_config/vivado_ip/cms_subsystem_0.tcl"
+generate_target {instantiation_template} [get_files ./${proj}/${cms_subsystem}/${cms_subsystem}.xci]
+generate_target all [get_files ./${proj}/${cms_subsystem}/${cms_subsystem}.xci]
+ipx::package_project -force -import_files ./${proj}/${cms_subsystem}/${cms_subsystem}.xci
+
+source "open-nic-shell/src/system_config/vivado_ip/system_config_axi_clock_converter.tcl"
+generate_target {instantiation_template} [get_files ./${proj}/${axi_clock_converter}/${axi_clock_converter}.xci]
+generate_target all [get_files ./${proj}/${axi_clock_converter}/${axi_clock_converter}.xci]
+ipx::package_project -force -import_files ./${proj}/${axi_clock_converter}/${axi_clock_converter}.xci
+
 update_ip_catalog -rebuild 
 ipx::infer_user_parameters [ipx::current_core]
 
