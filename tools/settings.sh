@@ -37,6 +37,7 @@ export NF_WORK_DIR=/tmp/${USER}
 export PYTHONPATH=.:${NFPLUS_FOLDER}/tools/scripts/:${NF_DESIGN_DIR}/lib/Python:${NFPLUS_FOLDER}/tools/scripts/NFTest
 export DRIVER_FOLDER=${NFPLUS_FOLDER}/lib/sw/std/driver/${DRIVER_NAME}
 export APPS_FOLDER=${NFPLUS_FOLDER}/lib/sw/std/apps/${DRIVER_NAME}
+export BOARD_FILE_PATH=${NFPLUS_FOLDER}/hw/lib/xilinx/xilinx_shell_v1_0_0/open-nic-shell/board_files
 
 
 # Check sequence

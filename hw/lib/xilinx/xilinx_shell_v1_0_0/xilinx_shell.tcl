@@ -34,6 +34,7 @@ set proj_dir ./ip_proj
 set ip_version 1.0
 set lib_name xilinx
 set proj ./proj
+set_param board.repoPaths $::env(BOARD_FILE_PATH)
 #####################################
 # Project Settings
 #####################################
@@ -164,6 +165,11 @@ source "open-nic-shell/src/system_config/vivado_ip/system_config_axi_crossbar.tc
 generate_target {instantiation_template} [get_files ./${proj}/${axi_crossbar}/${axi_crossbar}.xci]
 generate_target all [get_files ./${proj}/${axi_crossbar}/${axi_crossbar}.xci]
 ipx::package_project -force -import_files ./${proj}/${axi_crossbar}/${axi_crossbar}.xci
+
+source "open-nic-shell/src/system_config/vivado_ip/system_management_wiz.tcl"
+generate_target {instantiation_template} [get_files ./${proj}/${system_management_wiz}/${system_management_wiz}.xci]
+generate_target all [get_files ./${proj}/${system_management_wiz}/${system_management_wiz}.xci]
+ipx::package_project -force -import_files ./${proj}/${system_management_wiz}/${system_management_wiz}.xci
 
 update_ip_catalog -rebuild 
 ipx::infer_user_parameters [ipx::current_core]
