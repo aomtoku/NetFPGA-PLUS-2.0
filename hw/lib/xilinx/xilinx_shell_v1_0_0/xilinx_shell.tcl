@@ -130,7 +130,8 @@ generate_target {instantiation_template} [get_files ./${proj}/${axi_crossbar}/${
 generate_target all [get_files ./${proj}/${axi_crossbar}/${axi_crossbar}.xci]
 ipx::package_project -force -import_files ./${proj}/${axi_crossbar}/${axi_crossbar}.xci
 
-source "vivado_ip/qdma_subsystem_axi_cdc.tcl"
+#source "vivado_ip/qdma_subsystem_axi_cdc.tcl"
+source "open-nic-shell/src/qdma_subsystem/vivado_ip/qdma_subsystem_axi_cdc.tcl"
 generate_target {instantiation_template} [get_files ./${proj}/${axi_clock_converter}/${axi_clock_converter}.xci]
 generate_target all [get_files ./${proj}/${axi_clock_converter}/${axi_clock_converter}.xci]
 ipx::package_project -force -import_files ./${proj}/${axi_clock_converter}/${axi_clock_converter}.xci
@@ -140,7 +141,8 @@ generate_target {instantiation_template} [get_files ./${proj}/${axi_crossbar}/${
 generate_target all [get_files ./${proj}/${axi_crossbar}/${axi_crossbar}.xci]
 ipx::package_project -force -import_files ./${proj}/${axi_crossbar}/${axi_crossbar}.xci
 
-source "vivado_ip/qdma_subsystem_clk_div.tcl"
+#source "vivado_ip/qdma_subsystem_clk_div.tcl"
+source "open-nic-shell/src/qdma_subsystem/vivado_ip/qdma_subsystem_clk_div.tcl"
 generate_target {instantiation_template} [get_files ./${proj}/${clk_wiz}/${clk_wiz}.xci]
 generate_target all [get_files ./${proj}/${clk_wiz}/${clk_wiz}.xci]
 ipx::package_project -force -import_files ./${proj}/${clk_wiz}/${clk_wiz}.xci
