@@ -48,6 +48,7 @@ puts "Creating Xiilnx Xilinx OpenNIC Shell IP"
 #####################################
 # Design Parameters
 #####################################
+set num_qdma      1
 set num_phys_func 2
 set num_queue     2048
 set min_pkt_len   64
