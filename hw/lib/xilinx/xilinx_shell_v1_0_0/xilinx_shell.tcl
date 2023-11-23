@@ -192,7 +192,12 @@ generate_target {instantiation_template} [get_files ./${proj}/${axi_clock_conver
 generate_target all [get_files ./${proj}/${axi_clock_converter}/${axi_clock_converter}.xci]
 ipx::package_project -force -import_files ./${proj}/${axi_clock_converter}/${axi_clock_converter}.xci
 
-update_ip_catalog -rebuild 
+source "open-nic-shell/src/utility/vivado_ip/axi_lite_clock_converter.tcl"
+generate_target {instantiation_template} [get_files ./${proj}/${axi_clock_converter}/${axi_clock_converter}.xci]
+generate_target all [get_files ./${proj}/${axi_clock_converter}/${axi_clock_converter}.xci]
+ipx::package_project -force -import_files ./${proj}/${axi_clock_converter}/${axi_clock_converter}.xci
+
+update_ip_catalog -rebuild
 ipx::infer_user_parameters [ipx::current_core]
 
 set_property name ${design} [ipx::current_core]
