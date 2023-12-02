@@ -55,16 +55,16 @@ set_property board_part ${board} [current_project]
 set_property source_mgmt_mode DisplayOnly [current_project]
 set_property top ${top} [current_fileset]
 if {[string match $board_name "au280"]} {
-	set_property verilog_define { {BOARD_AU280} {au280} {__synthesis__} } [current_fileset]
+	set_property verilog_define { {BOARD_AU280} {au280} {__au280__} {__synthesis__} } [current_fileset]
 	set board_param "AU280"
 } elseif {[string match $board_name "au250"]} {
-	set_property verilog_define { {BOARD_AU250} {__synthesis__} } [current_fileset]
+	set_property verilog_define { {BOARD_AU250} {__au250__} {__synthesis__} } [current_fileset]
 	set board_param "AU250"
 } elseif {[string match $board_name "au200"]} {
-	set_property verilog_define { {BOARD_AU200} {__synthesis__} } [current_fileset]
+	set_property verilog_define { {BOARD_AU200} {__au200__} {__synthesis__} } [current_fileset]
 	set board_param "AU200"
 } elseif {[string match $board_name "vcu1525"]} {
-	set_property verilog_define { {BOARD_VCU1525} {__synthesis__} } [current_fileset]
+	set_property verilog_define { {BOARD_VCU1525} {__vcu1525__} {__synthesis__} } [current_fileset]
 	set board_param "VCU1525"
 }
 set_property generic "C_NF_DATA_WIDTH=${datapath_width_bit} BOARD=\"${board_param}\"" [current_fileset]
