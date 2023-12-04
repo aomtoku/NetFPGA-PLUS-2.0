@@ -23,13 +23,13 @@
 # @NETFPGA_LICENSE_HEADER_END@
 #
 ### User defined
-export NFPLUS_FOLDER=${HOME}/NetFPGA-PLUS
+export NFPLUS_FOLDER=${HOME}/NetFPGA-PLUS-2.0
 export BOARD_NAME=au250
 export NF_PROJECT_NAME=reference_switch
 export PYTHON_BNRY=/usr/bin/python3
 
 ### Don't change
-export VERSION=2020.2
+export VERSION=2023.2
 export PROJECTS=${NFPLUS_FOLDER}/projects
 export CONTRIB_PROJECTS=${NFPLUS_FOLDER}/contrib-projects
 export NF_DESIGN_DIR=${NFPLUS_FOLDER}/hw/projects/${NF_PROJECT_NAME}
