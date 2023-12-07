@@ -302,7 +302,7 @@ diff -uprN ./onic_netdev.c ./onic_netdev.c
 diff -uprN ./onic_netdev.h ./onic_netdev.h
 --- ./onic_netdev.h	2023-12-07 12:27:36.237535443 +0000
 +++ ./onic_netdev.h	2023-12-07 12:35:34.613759583 +0000
-@@ -43,10 +43,35 @@ int onic_set_mac_address(struct net_devi
+@@ -43,10 +43,32 @@ int onic_set_mac_address(struct net_devi
  
  int onic_do_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd);
  
