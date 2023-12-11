@@ -30,6 +30,32 @@ module open_nic_shell #(
 `ifndef sim
 `ifdef __au280__
   output                         hbm_cattrip, // Fix the CATTRIP issue for AU280 custom flow
+  input                    [3:0] satellite_gpio,
+`elsif __au50__
+  output                         hbm_cattrip,
+  input                    [1:0] satellite_gpio,
+`elsif __au55n__
+  output                         hbm_cattrip,
+  input                    [3:0] satellite_gpio,
+`elsif __au55c__
+  output                         hbm_cattrip,
+  input                    [3:0] satellite_gpio,
+`elsif __au200__
+  output                   [1:0] qsfp_resetl,
+  input                    [1:0] qsfp_modprsl,
+  input                    [1:0] qsfp_intl,
+  output                   [1:0] qsfp_lpmode,
+  output                   [1:0] qsfp_modsell,
+  input                    [3:0] satellite_gpio,
+`elsif __au250__
+  output                   [1:0] qsfp_resetl,
+  input                    [1:0] qsfp_modprsl,
+  input                    [1:0] qsfp_intl,
+  output                   [1:0] qsfp_lpmode,
+  output                   [1:0] qsfp_modsell,
+  input                    [3:0] satellite_gpio,
+`elsif __au45n__
+  input                    [1:0] satellite_gpio,
 `endif
 
   input                   [15:0] pcie_rxp,
