@@ -55,6 +55,10 @@ module top_wrapper #(
 	input                         pcie_clk_n,
 	input                         pcie_rst_n,
 
+	// Satellite core
+	input                         satellite_uart_0_rxd,
+	output                        satellite_uart_0_txd,
+
 	output                        m_axil_awvalid,
 	output                 [31:0] m_axil_awaddr,
 	input                         m_axil_awready,
@@ -399,6 +403,10 @@ module top_wrapper #(
     .qsfp_txn      ({qsfp1_txn, qsfp0_txn}),
     .qsfp_refclk_p ({qsfp1_clk_p, qsfp0_clk_p}),
     .qsfp_refclk_n ({qsfp1_clk_n, qsfp0_clk_n}),
+
+    .satellite_uart_0_rxd(satellite_uart_0_rxd),
+    .satellite_uart_0_txd(satellite_uart_0_txd),
+
 `else // !`ifdef __synthesis__
     .s_axil_awvalid (),
     .s_axil_awaddr  (),

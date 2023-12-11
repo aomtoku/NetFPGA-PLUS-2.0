@@ -82,6 +82,10 @@ module top #(
 	input  wire [3:0] QSFP1_RX_P,
 	input  wire [3:0] QSFP1_RX_N,
 
+	// Satellite core
+	input             satellite_uart_0_rxd,
+	output            satellite_uart_0_txd,
+
 	input  wire         sysclk_p,
 	input  wire         sysclk_n,
 
@@ -530,6 +534,9 @@ module top #(
     .pcie_clk_p        (pci_clk_p),
     .pcie_clk_n        (pci_clk_n),
     .pcie_rst_n        (pci_rst_n),
+    // Satellite core
+    .satellite_uart_0_rxd(satellite_uart_0_rxd),
+    .satellite_uart_0_txd(satellite_uart_0_txd),
 
     .m_axil_awvalid    (m_axil_awvalid),
     .m_axil_awaddr     (m_axil_awaddr ),
