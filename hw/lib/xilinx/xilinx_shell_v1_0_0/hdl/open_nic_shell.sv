@@ -20,43 +20,22 @@
 `timescale 1ns/1ps
 module open_nic_shell #(
   parameter [31:0] BUILD_TIMESTAMP = 32'h01010000,
-  parameter int MAX_PKT_LEN   = 1518,
-  parameter int MIN_PKT_LEN   = 64,
-  parameter int USE_PHYS_FUNC = 1,
-  parameter int NUM_PHYS_FUNC = 2,
-  parameter int NUM_QUEUE     = 2048,
-  parameter int NUM_CMAC_PORT = 2
+  parameter int MAX_PKT_LEN        = 1518,
+  parameter int MIN_PKT_LEN        = 64,
+  parameter int NUM_QDMA           = 1,
+  parameter int USE_PHYS_FUNC      = 1,
+  parameter int NUM_PHYS_FUNC      = 2,
+  parameter int NUM_QUEUE          = 2048,
+  parameter int NUM_CMAC_PORT      = 2
 ) (
 `ifndef sim
-`ifdef __au280__
-  output                         hbm_cattrip, // Fix the CATTRIP issue for AU280 custom flow
+  output                         hbm_cattrip, 
   input                    [3:0] satellite_gpio,
-`elsif __au50__
-  output                         hbm_cattrip,
-  input                    [1:0] satellite_gpio,
-`elsif __au55n__
-  output                         hbm_cattrip,
-  input                    [3:0] satellite_gpio,
-`elsif __au55c__
-  output                         hbm_cattrip,
-  input                    [3:0] satellite_gpio,
-`elsif __au200__
   output                   [1:0] qsfp_resetl,
   input                    [1:0] qsfp_modprsl,
   input                    [1:0] qsfp_intl,
   output                   [1:0] qsfp_lpmode,
   output                   [1:0] qsfp_modsell,
-  input                    [3:0] satellite_gpio,
-`elsif __au250__
-  output                   [1:0] qsfp_resetl,
-  input                    [1:0] qsfp_modprsl,
-  input                    [1:0] qsfp_intl,
-  output                   [1:0] qsfp_lpmode,
-  output                   [1:0] qsfp_modsell,
-  input                    [3:0] satellite_gpio,
-`elsif __au45n__
-  input                    [1:0] satellite_gpio,
-`endif
 
   input                   [15:0] pcie_rxp,
   input                   [15:0] pcie_rxn,
@@ -682,11 +661,11 @@ module open_nic_shell #(
     .m_axis_qdma_cpl_tready               (m_axis_qdma_cpl_sim_tready),
 `endif
 
-    .mod_rstn                             (qdma_rstn[i]),
-    .mod_rst_done                         (qdma_rst_done[i]),
+    .mod_rstn                             (qdma_rstn),
+    .mod_rst_done                         (qdma_rst_done),
 
-    .axil_cfg_aclk                        (axil_aclk[0]),
-    .axil_aclk                            (axil_aclk[i]),
+    .axil_cfg_aclk                        (axil_aclk),
+    .axil_aclk                            (axil_aclk),
 
   `ifdef __au55n__
     .ref_clk_100mhz                       (ref_clk_100mhz),
@@ -697,8 +676,8 @@ module open_nic_shell #(
   `elsif __au280__
     .ref_clk_100mhz                       (ref_clk_100mhz),
   `endif
-    .axis_master_aclk                     (axis_aclk[0]),
-    .axis_aclk                            (axis_aclk[1])
+    .axis_master_aclk                     (axis_aclk),
+    .axis_aclk                            (axis_aclk)
   );
 
   generate for (genvar i = 0; i < NUM_CMAC_PORT; i++) begin: cmac_port
@@ -826,7 +805,7 @@ module open_nic_shell #(
 
       .mod_rstn                     (cmac_rstn[i]),
       .mod_rst_done                 (cmac_rst_done[i]),
-      .axil_aclk                    (axil_aclk[0])
+      .axil_aclk                    (axil_aclk)
     );
   end: cmac_port
   endgenerate

@@ -43,7 +43,18 @@ set_property BOARD_PART $board [current_project]
 set_property source_mgmt_mode All [current_project]  
 set_property top ${top} [current_fileset]
 set_property ip_repo_paths $::env(NFPLUS_FOLDER)/hw/lib/  [current_fileset]
-set_property verilog_define { {__synthesis__} } [current_fileset]
+if {[string match $board_name "au280"]} {
+	set_property verilog_define { {__synthesis__} {__au280__}} [current_fileset]
+} elseif {[string match $board_name "au250"]} {
+	set_property verilog_define { {__synthesis__} {__au250__}} [current_fileset]
+} elseif {[string match $board_name "au200"]} {
+	set_property verilog_define { {__synthesis__} {__au200__}} [current_fileset]
+} elseif {[string match $board_name "vcu1525"]} {
+	set_property verilog_define { {__synthesis__} {__au200__}} [current_fileset]
+} else {
+	puts "Error: ${board_name} is not found."
+	exit -1
+}
 puts "Creating Xiilnx Xilinx OpenNIC Shell IP"
 #####################################
 # Design Parameters

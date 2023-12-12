@@ -37,33 +37,33 @@ module top #(
 	parameter NF_C_S_AXI_ADDR_WIDTH        = 32
 )(	
 `ifdef __au280__
-	output                         hbm_cattrip,
-	input                    [3:0] satellite_gpio,
+	output wire                    hbm_cattrip,
+	input  wire              [3:0] satellite_gpio,
 `elsif __au50__
-	output                         hbm_cattrip,
-	input                    [1:0] satellite_gpio,
+	output wire                    hbm_cattrip,
+	input  wire              [1:0] satellite_gpio,
 `elsif __au55n__
-	output                         hbm_cattrip,
-	input                    [3:0] satellite_gpio,
+	output wire                    hbm_cattrip,
+	input  wire              [3:0] satellite_gpio,
 `elsif __au55c__
-	output                         hbm_cattrip,
-	input                    [3:0] satellite_gpio,
+	output wire                    hbm_cattrip,
+	input  wire              [3:0] satellite_gpio,
 `elsif __au200__
 	//output                   [1:0] qsfp_resetl,
 	//input                    [1:0] qsfp_modprsl,
 	//input                    [1:0] qsfp_intl,
 	//output                   [1:0] qsfp_lpmode,
 	//output                   [1:0] qsfp_modsell,
-	input                    [3:0] satellite_gpio,
+	input  wire              [3:0] satellite_gpio,
 `elsif __au250__
 	//output                   [1:0] qsfp_resetl,
 	//input                    [1:0] qsfp_modprsl,
 	//input                    [1:0] qsfp_intl,
 	//output                   [1:0] qsfp_lpmode,
 	//output                   [1:0] qsfp_modsell,
-	input                    [3:0] satellite_gpio,
+	input  wire              [3:0] satellite_gpio,
 `elsif __au45n__
-	input                    [1:0] satellite_gpio,
+	input  wire              [1:0] satellite_gpio,
 `endif
 	input wire QSFP0_CLOCK_P,
 	input wire QSFP0_CLOCK_N,
@@ -109,8 +109,8 @@ module top #(
 	input  wire [3:0] QSFP1_RX_N,
 
 	// Satellite core
-	input             satellite_uart_0_rxd,
-	output            satellite_uart_0_txd,
+	input  wire       satellite_uart_0_rxd,
+	output wire       satellite_uart_0_txd,
 
 	input  wire         sysclk_p,
 	input  wire         sysclk_n,
@@ -125,9 +125,9 @@ module top #(
 	input  wire [15:0]  pcie_rxn
 );
 
-`ifdef BOARD_AU280
-  assign STAT_CATTRIP = 1'b0;
-`endif 
+//`ifdef BOARD_AU280
+//  assign STAT_CATTRIP = 1'b0;
+//`endif 
 
 `ifndef BOARD_AU280
   // QSFP Clock for 156.25MHz (2'b01)
