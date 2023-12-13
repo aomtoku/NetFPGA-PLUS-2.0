@@ -146,18 +146,3 @@ set_property -dict {PACKAGE_PIN AN21 IOSTANDARD LVCMOS12}         [get_ports sat
 ##########################################################################
 # Timing
 ##########################################################################
-# CMAC user clock
-create_clock -period 3.103 -name cmac_clk_0 [get_pins -hier -filter name=~*cmac_port[0]*cmac_gtwiz_userclk_tx_inst/txoutclk_out[0]]
-create_clock -period 3.103 -name cmac_clk_1 [get_pins -hier -filter name=~*cmac_port[1]*cmac_gtwiz_userclk_tx_inst/txoutclk_out[0]]
-
-# Datapath Clock - 340MHz
-create_clock -period 2.941 -name dp_clk [get_pins -hier -filter name=~*u_clk_wiz_1/clk_out1]
-
-set_false_path -from [get_clocks axis_aclk] -to [get_clocks dp_clk]
-set_false_path -from [get_clocks dp_clk] -to [get_clocks axis_aclk]
-set_false_path -from [get_clocks cmac_clk_1] -to [get_clocks dp_clk]
-set_false_path -from [get_clocks dp_clk] -to [get_clocks cmac_clk_1]
-set_false_path -from [get_clocks cmac_clk_0] -to [get_clocks dp_clk]
-set_false_path -from [get_clocks dp_clk] -to [get_clocks cmac_clk_0]
-set_false_path -from [get_clocks clk_out1_qdma_subsystem_clk_div] -to [get_clocks axis_aclk]
-set_false_path -from [get_clocks dp_clk] -to [get_clocks clk_out1_qdma_subsystem_clk_div]
