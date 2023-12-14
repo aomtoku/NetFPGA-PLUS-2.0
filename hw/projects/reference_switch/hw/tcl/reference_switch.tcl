@@ -221,9 +221,9 @@ CONFIG.S00_SINGLE_THREAD {1}                 \
 CONFIG.M00_A00_ADDR_WIDTH {16}               \
 CONFIG.M01_A00_ADDR_WIDTH {16}               \
 CONFIG.M02_A00_ADDR_WIDTH {16}               \
-CONFIG.M00_A00_BASE_ADDR {0x0000000000100000}\
-CONFIG.M01_A00_BASE_ADDR {0x0000000000110000}\
-CONFIG.M02_A00_BASE_ADDR {0x0000000000120000}] [get_ips axi_crossbar_0]
+CONFIG.M00_A00_BASE_ADDR {0x0000000000000000}\
+CONFIG.M01_A00_BASE_ADDR {0x0000000000010000}\
+CONFIG.M02_A00_BASE_ADDR {0x0000000000020000}] [get_ips axi_crossbar_0]
 set_property generate_synth_checkpoint false [get_files axi_crossbar_0.xci]
 reset_target all [get_ips axi_crossbar_0]
 generate_target all [get_ips axi_crossbar_0]
@@ -302,9 +302,9 @@ CONFIG.S00_SINGLE_THREAD {1}                 \
 CONFIG.M00_A00_ADDR_WIDTH {16}               \
 CONFIG.M01_A00_ADDR_WIDTH {16}               \
 CONFIG.M02_A00_ADDR_WIDTH {16}               \
-CONFIG.M00_A00_BASE_ADDR {0x0000000000200000}\
-CONFIG.M01_A00_BASE_ADDR {0x0000000000210000}\
-CONFIG.M02_A00_BASE_ADDR {0x0000000000220000}] [get_ips axi_crossbar_1]
+CONFIG.M00_A00_BASE_ADDR {0x0000000000000000}\
+CONFIG.M01_A00_BASE_ADDR {0x0000000000010000}\
+CONFIG.M02_A00_BASE_ADDR {0x0000000000020000}] [get_ips axi_crossbar_1]
 set_property generate_synth_checkpoint false [get_files axi_crossbar_1.xci]
 reset_target all [get_ips axi_crossbar_1]
 generate_target all [get_ips axi_crossbar_1]
