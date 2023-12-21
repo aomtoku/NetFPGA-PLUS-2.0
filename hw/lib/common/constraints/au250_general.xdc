@@ -146,22 +146,20 @@ set_property -dict {PACKAGE_PIN AN21 IOSTANDARD LVCMOS12}         [get_ports sat
 ##########################################################################
 # Timing
 ##########################################################################
-# Datapath Clock - 340MHz
+# axis_aclk needs to be specified
+create_clock -period 4.000 -name axis_aclk [get_pins -hier -filter name=~*u_top_wrapper/xilinx_nic_shell/axis_aclk]
+
+# Datapath Clock - 340MHz   (called core_clk internally apparently)
 create_clock -period 2.941 -name dp_clk [get_pins -hier -filter name=~*u_clk_wiz_1/clk_out1]
 
-# CMAC user clock
-create_clock -period 3.103 -name cmac_clk_0 [get_pins -hier -filter name=~*cmac_port[0]*cmac_gtwiz_userclk_tx_inst/txoutclk_out[0]]
-create_clock -period 3.103 -name cmac_clk_1 [get_pins -hier -filter name=~*cmac_port[1]*cmac_gtwiz_userclk_tx_inst/txoutclk_out[0]]
+# PCIe clock 100MHz
+create_clock -period 10.000 -name pcie_refclk [get_ports pci_clk_p]
 
 set_false_path -from [get_clocks axis_aclk] -to [get_clocks dp_clk]
 set_false_path -from [get_clocks dp_clk] -to [get_clocks axis_aclk]
-set_false_path -from [get_clocks cmac_clk_1] -to [get_clocks dp_clk]
-set_false_path -from [get_clocks dp_clk] -to [get_clocks cmac_clk_1]
-set_false_path -from [get_clocks cmac_clk_0] -to [get_clocks dp_clk]
-set_false_path -from [get_clocks dp_clk] -to [get_clocks cmac_clk_0]
+set_false_path -from [get_clocks dp_clk] -to [get_clocks {txoutclk_out[0]}]
+set_false_path -from [get_clocks {txoutclk_out[0]}] -to [get_clocks dp_clk]
+set_false_path -from [get_clocks dp_clk] -to [get_clocks {txoutclk_out[0]_1}]
+set_false_path -from [get_clocks {txoutclk_out[0]_1}] -to [get_clocks dp_clk]
 set_false_path -from [get_clocks clk_out1_qdma_subsystem_clk_div] -to [get_clocks axis_aclk]
 set_false_path -from [get_clocks dp_clk] -to [get_clocks clk_out1_qdma_subsystem_clk_div]
-
-create_pblock pblock_qdma_subsystem
-add_cells_to_pblock [get_pblocks pblock_qdma_subsystem] [get_cells -quiet [list u_top_wrapper/xilinx_nic_shell/inst/qdma_subsystem_inst]]
-resize_pblock [get_pblocks pblock_qdma_subsystem] -add {SLR1}
