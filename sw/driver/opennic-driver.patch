@@ -91,7 +91,7 @@ diff -uprN ./onic_netdev.c ./onic_netdev.c
  
 +#ifdef NF_IOCTL
 +#define NFDP_OFFSET     0x0000
-+#define NFDP_END        0x70000
++#define NFDP_END        0x400000
 +#define NFDP_MAXLEN     NFDP_END - NFDP_OFFSET
 +
 +#define NFDP_IOCTL_CMD_WRITE_REG        (SIOCDEVPRIVATE+1)
