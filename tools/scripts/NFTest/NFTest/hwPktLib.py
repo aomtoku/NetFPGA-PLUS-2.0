@@ -78,8 +78,8 @@ def start():
     while not alive:
         alive = True
         for iface in ifaceArray:
-            alive &= captureThreads[iface].isAlive()
-            if not captureThreads[iface].isAlive() and captureThreads[iface].hasStarted():
+            alive &= captureThreads[iface].is_alive()
+            if not captureThreads[iface].is_alive() and captureThreads[iface].hasStarted():
                 raise RuntimeError("Thread on %s started and terminated..."%iface)
 
 ############################
