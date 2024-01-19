@@ -491,9 +491,9 @@ begin
 					activity_trans_log <= '0';
 					write( l, string'("Data Error: register error!!!! "));
 					write( l, string'("Seen from user: "));
-					hwrite( l, data_r);
+					hwrite( l, r_rsp_data);
 					write( l, string'(" but expected from system: "));
-					hwrite( l, r_rsp_data, RIGHT, r_rsp_data'length/4 );
+					hwrite( l, data_r, RIGHT, r_rsp_data'length/4 );
 				    end if;
 				else     
 					activity_trans_log <= '0';
